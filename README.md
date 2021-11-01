@@ -1,2 +1,1 @@
-# Gestion-Alpura
-# Gestion-Alpura
+App para visualización y gestión de información de empleados, mediante la cual se puede realizar con permisos de administrador o super administrador una evaluación de desempeño a cualquier usuario de la plataforma que le servirá a la empresa como base para tomar decisiones con respecto al rendimiento de cada funcionario
