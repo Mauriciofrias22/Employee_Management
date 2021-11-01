@@ -1,0 +1,131 @@
+:root{
+    --color2: rgb(1 ,158, 226);
+    --color1: rgb(0, 83, 161);
+    --color3: rgb(0, 132, 240);
+
+}
+/* CSS del INDEX*/
+body{
+    font-family: 'Dosis', sans-serif;
+}
+.login-desing{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    height: 100vh;
+}
+
+.waves{
+    background-color: black; 
+    background-image: url("/static/images/waves-login4.jpeg"); 
+    background-repeat: no-repeat;
+    background-size: 180% ;
+    background-position: center; 
+}
+
+.login{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center
+    
+}
+
+.logo-login{
+    width: 50%;
+}
+
+.login-data{
+ /*  border: 5px solid var(--color1);*/
+    border-radius: 10px;
+    text-align: center;
+        width: 60%;
+
+}
+
+.login-data h1 {
+    font-weight: 200;
+}
+
+.input-group{
+    
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+}
+
+.input-fill input{
+    border: none;
+    border-bottom: 3px solid var(--color1);
+    border-radius: 10px;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.0625rem;
+    padding-left: 0.875rem;
+    line-height: 147%;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.input-fill input:focus{
+    outline: none;
+    border-radius: 5px;
+    border-color: var(--color2);
+}
+
+.input-fill input:hover{
+    background-color:rgb(213, 238, 248) ;
+}
+
+.input-fill input:focus + .input-label{
+top: 0;
+margin-bottom: 2rem;
+color: var(--color2) ;
+}
+
+.input-fill .input-label{
+    position: absolute;
+    top: 15px;
+    left: 28px;
+    line-height: 147%;
+    color: var(--color1);
+    transition: top 0.2s;
+    font-weight: 700;
+
+}
+ 
+.input-fill i {
+    position: absolute;
+    top: 18px;
+    right: 0%;
+    color: var(--color1);
+    font-size: 1.5rem;
+    
+}
+
+.input-fill input:focus ~ i {
+    color: var(--color2); 
+}
+
+.btn-login{
+    border-radius: 3rem;
+    width: 45%;
+    border:1px solid var(--color1);
+    line-height: 1.6rem;
+    font-size: 1.3rem;
+    background-color: var(--color1);
+    color: white;
+    padding: 0.5rem 0;
+    transition: 0.3s ease-in-out all;
+    font-weight: 500;
+}
+
+.btn-login:hover{
+    cursor: pointer;
+    background-color: white;
+    color: var(--color2);
+}
+
+/* CSS del STATUS*/
+

@@ -1,0 +1,244 @@
+:root {
+  --color2: rgb(1, 158, 226);
+  --color1: rgb(0, 83, 161);
+  --color3: rgb(0, 132, 240);
+}
+
+body {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236000f9' fill-opacity='0.12'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  font-family: "Dosis", sans-serif;
+}
+
+.header {
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  color: var(--color1);
+  overflow: auto;
+}
+
+.hearder-info img {
+  border: solid;
+  border-color: var(--color1);
+  border-radius: 100%;
+  border-width: 1px;
+  padding: 0;
+  width: 10rem;
+}
+
+.logo-header {
+  float: right;
+  width: 10%;
+}
+
+.titulo-header {
+  text-align: left;
+  padding: 1rem;
+  margin: center;
+  font: 1.5rem;
+  font-weight: lighter;
+}
+
+.status-desing {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  height: 100vh;
+}
+
+#nombre-perfil {
+  color: var(--color1);
+  font-weight: normal;
+}
+.table-info {
+  margin: 10%;
+  max-width: 80%;
+  min-width: 80%;
+  font-size: 1.5rem;
+  border: solid;
+  border-color: var(--color1);
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.table-info th {
+  padding-left: 20px;
+  font-weight: normal;
+  color: var(--color1);
+}
+
+.table-info tr {
+  text-align: left;
+}
+
+.table-results{
+  margin: 10%;
+  max-width: 90%;
+  min-width: 90%;
+  font-size: 1.5rem;
+  border: solid;
+  border-color: var(--color1);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.table-results th {
+  padding-left: 20px;
+  font-weight: normal;
+  color: var(--color1);
+}
+
+.table-results tr {
+  text-align: right;
+}
+
+.add-user {
+  margin: 2rem;
+  text-align: right;
+}
+
+.btn-add-user {
+  background-color: var(--color2);
+  height: max-content;
+  border: 1px solid var(--color2);
+  border-radius: 3rem;
+  width: 53%;
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-add-user:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
+
+.edit-user {
+  margin: 2rem;
+  text-align: right;
+}
+
+.btn-edit-user {
+  background-color: var(--color3);
+  height: max-content;
+  border: 1px solid var(--color3);
+  border-radius: 3rem;
+  width: 53%;
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-edit-user:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
+
+.close-sesion {
+  margin: 2rem;
+  text-align: center;
+}
+
+.btn-close-sesion {
+  border-radius: 3rem;
+  width: 45%;
+  border: 1px solid var(--color1);
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  background-color: var(--color1);
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-close-sesion:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
+
+.add-picture{
+  margin: 2rem;
+  text-align: right;
+}
+
+.add-picture-button {
+  margin: 2rem;
+  text-align: right;
+}
+
+.btn-add-picture {
+  border-radius: 3rem;
+  width: 45%;
+  border: 1px solid var(--color3);
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  background-color: var(--color3);
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-add-picture:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
+
+.save {
+  margin: 2rem;
+  text-align: center;
+}
+
+.btn-save {
+  border-radius: 3rem;
+  width: 45%;
+  border: 1px solid var(--color1);
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  background-color: var(--color1);
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-save:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
+
+.main-menu {
+  margin: 2rem;
+  text-align: right;
+}
+
+.btn-main-menu {
+  border-radius: 3rem;
+  width: 45%;
+  border: 1px solid var(--color3);
+  line-height: 1.6rem;
+  font-size: 1.3rem;
+  background-color: var(--color3);
+  color: white;
+  padding: 0.5rem 0;
+  transition: 0.3s ease-in-out all;
+  font-weight: 500;
+}
+
+.btn-main-menu:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--color2);
+}
