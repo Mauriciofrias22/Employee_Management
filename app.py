@@ -1,6 +1,5 @@
-from flask import Flask, request, flash, render_template, redirect, url_for, session, g
+from flask import Flask, request, flash, render_template, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-import functools
 
 from db import get_db
 
@@ -36,14 +35,15 @@ def index():
                 flash(error)
             else:
                 if user[0] == 1:
-                    data=rendervisualf(user)
+                    lag = user[1]
+                    dt = get_db()
+                    data = dt.execute('SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE id_empleado= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE id_empleado = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE id_empleado = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE id_empleado = ?)' , (lag,lag,lag,lag)).fetchone()
+                    print(data[0])
                     return render_template('VisualizarUsuarioFinal.html', data=data)
                 elif user[0] == 2:
-                    data=rendervisualf(user)
-                    return render_template('gestorEmpleadosAdmin.html', data=data)
+                    return redirect(url_for('menu_administrador'))
                 elif user[0] == 3:
-                    data=rendervisualf(user)
-                    return render_template('gestorUsuarioSuper.html', data=data)
+                    return redirect(url_for('menuSuperAdmin'))
                 db.close_db()
 
         return render_template('index.html')
@@ -51,32 +51,20 @@ def index():
         print(ex)
         return render_template('index.html')
 
-def rendervisualf(user):
-     lag = user[1]
-     dt = get_db()
-     data = dt.execute('SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE id_empleado= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE id_empleado = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE id_empleado = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE id_empleado = ?)' , (lag,lag,lag,lag)).fetchone()
-     return data
 
-@app.route ('/ver/<doc>')
-def renderver(doc):      
-     dt = get_db()
-     data = dt.execute('SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE documento= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE documento = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE documento = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE documento = ?)' , (doc,doc,doc,doc)).fetchone()
-     return render_template('VisualizarUsuarioFinal.html', data=data)  
-
-@app.route('/VisualizadordesdeAdmin', methods=['GET', 'POST'])
-def visualizadordesdeAdmin(user):
-    data=rendervisualf(user)
-    return render_template('VisualizarUsuarioFinal.html', data=data)
-    
-
-@app.route('/VisualizarUsuarioSuper', methods=['GET', 'POST'])
-def visualizarUsuarioSupe():
-    return render_template('VisualizarUsuarioFinal.html')
+#@app.route('/menu_empleado', methods=['GET', 'POST'])
+"""def menu_empleado():
+    print('menu')
+    dt = get_db()
+    data = dt.execute(
+        'SELECT nombres , apellidos  FROM empleados WHERE id_empleado= id '
+        ).fetchone()
+    print(data)
+    return render_template('VisualizarUsuarioFinal.html', data=data)"""
 
 
 @app.route('/menu_administrador', methods=['GET', 'POST'])
 def menu_administrador():
-    data=rendervisualf()
     return render_template('gestorEmpleadosAdmin.html')
 
 
@@ -108,45 +96,34 @@ def btn_agregarEmpleados():
 
     return render_template('AgregarEmpleados.html')
 
-@app.route('/PuenteBuscarEmpleados', methods=['GET', 'POST'])
-def puentebuscarEmpleados():
-    try:
-        db = get_db()
-        data = db.execute('SELECT * FROM empleados WHERE usuario = 1').fetchall()
-    except Exception as ex:
-        print(ex)
-    return render_template('BuscarEmpleado.html', data = data)
 
-@app.route('/PuenteBuscarUsuario', methods=['GET', 'POST'])
-def puentebuscarUsuario():
-    try:
-        db = get_db()
-        data = db.execute('SELECT * FROM empleados WHERE usuario < 3').fetchall()
-    except Exception as ex:
-        print(ex)
-    return render_template('BuscarEliminarUsuario.html', data = data)
+# esto es para crear un empleado nuevo
 
-@app.route('/EliminarUsuario/<doc>')
-def eliminarUsuario(doc):   
-    db=get_db()    
-    db.execute('DELETE FROM empleados WHERE documento = ?', (doc, ))
-    db.commit()
-    return redirect(url_for('puentebuscarUsuario'))
+"""
+def convertir_foto_a_binario(foto):
+    with open(foto, 'rb') as f:
+        blob = f.read()
+
+    return blob
+
+def crearEmpleado(db, usuario):
+    foto_binario = convertir_foto_a_binario(usuario[-1])
+
+    db = get_db()
+    usuario = db.execute("INSERT INTO usuario (usuario, nombres, apellidos, salario, cod_tipo_contrato, dependencia, fecha_inicio, fecha_final, correo, contraseña, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"%
+                        (usuario[0], usuario[1], usuario[2], usuario[3], usuario[4], usuario[5], usuario[6], usuario[7], usuario[8], usuario[9], foto_binario))
+    db.commit()        
+
+foto_archivo = '/static/images/foto empleado.png'
+
+empleado_creado = 'Usuario Creado Correctamente'
+flash(empleado_creado) 
+"""
 
 
 @app.route('/BuscarEmpleados', methods=['GET', 'POST'])
-def buscarEmpleados():                 
-    try: 
-        db = get_db
-        n = db.execute('SELECT documento FROM empleados').fetchall()
-        for i in n:
-            data1=[]
-            data1.append(db.execute('SELECT nombres , apellidos, desc_documento, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados, documento, contrato,cargo,dependencia WHERE documento= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE documento = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE documento = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE documento = ?) AND id_doc = (SELECT tipo_doc FROM empleados WHERE documento = ?)' , (i[0], i[0], i[0], i[0], i[0])).fetchone())  
-        
-    except  Exception as ex:
-        print(ex)
-    return render_template('BuscarEmpleado.html', data1=data1)
-    
+def buscarEmpleados():
+    return render_template('BuscarEmpleado.html')
 
 
 @app.route('/EditarEmpleados', methods=['GET', 'POST'])
@@ -159,7 +136,9 @@ def desempeñoEmpleados():
     return render_template('DesempeñoEmpleado.html')
 
 
-
+@app.route('/VisualizadordesdeAdmin', methods=['GET', 'POST'])
+def visualizadordesdeAdmin():
+    return render_template('VisualisadordesdeAdmin.html')
 
 
 @app.route('/menuSuperAdmin', methods=['GET', 'POST'])
@@ -209,6 +188,12 @@ def buscaryEliminarUsuario():
 @app.route('/DesempeñoUsuarioSuper', methods=['GET', 'POST'])
 def desempeñoUsuarioSuper():
     return render_template('DesempeñodesdeSuper.html')
+
+
+@app.route('/VisualizarUsuarioSuper', methods=['GET', 'POST'])
+def visualizarUsuarioSupe():
+    return render_template('VisualizardesdeSuper.html')
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=443, ssl_context=('micertificado.pem', 'llaveprivada.pem'))
